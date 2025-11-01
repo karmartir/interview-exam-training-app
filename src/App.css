@@ -353,6 +353,54 @@
   margin-top: 0;
 }
 
+/* Buttons Grid Layout */
+.buttons-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.roll-button-wrapper {
+  display: flex;
+  align-items: flex-start;
+}
+
+.category-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.category-btn {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.category-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive for buttons */
+@media (max-width: 768px) {
+  .buttons-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .category-buttons {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .category-btn {
+    flex: 1;
+    min-width: 45%;
+  }
+}
 
 
 /* Animations */

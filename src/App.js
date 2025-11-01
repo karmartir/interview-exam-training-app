@@ -14,6 +14,9 @@ function App() {
   const [answeredCount, setAnsweredCount] = useState(0);
   const [isButtonHovered, setIsButtonHovered] = useState(false);
   const [hasRolled, setHasRolled] = useState(false);
+  const [category, setCategory] = useState("developer");
+
+  const currentQuestions = interviewQuestions[category];
 
   // Timer effect
   useEffect(() => {
@@ -34,7 +37,7 @@ function App() {
     setHasRolled(true);
 
     setTimeout(() => {
-      const randomIndex = Math.floor(Math.random() * interviewQuestions.length);
+      const randomIndex = Math.floor(Math.random() * currentQuestions.length);
       setSelectedQuestion(randomIndex);
       setActiveKey(null);
       setIsShaking(false);
@@ -44,6 +47,17 @@ function App() {
         setQuestionHistory([...questionHistory, randomIndex]);
       }
     }, 500);
+  };
+
+  const handleCategoryChange = (newCategory) => {
+    setCategory(newCategory);
+    setSelectedQuestion(null);
+    setQuestionHistory([]);
+    setAnsweredCount(0);
+    setShowAnswer(false);
+    setTimer(0);
+    setIsTimerRunning(false);
+    setActiveKey(null);
   };
 
   const handleStartTimer = () => {
@@ -88,6 +102,7 @@ function App() {
     setTimer(0);
     setIsTimerRunning(false);
     setHasRolled(false);
+    setCategory("developer");
   };
 
   return (
@@ -110,7 +125,7 @@ function App() {
               <div className="progress-item">
                 <span className="progress-label">Questions Practiced:</span>
                 <span className="progress-value">
-                  {questionHistory.length} / {interviewQuestions.length}
+                  {questionHistory.length} / {currentQuestions.length}
                 </span>
               </div>
               <div className="progress-item">
@@ -126,18 +141,56 @@ function App() {
               </Button>
             </div>
 
-            <div className="button-container">
-              <Button
-                variant="primary"
-                size="lg"
-                onClick={handleRandomQuestion}
-                onMouseEnter={() => setIsButtonHovered(true)}
-                onMouseLeave={() => setIsButtonHovered(false)}
-                className={`random-button ${isShaking ? "shaking" : ""}`}
-                disabled={isShaking}
-              >
-                {getButtonText()}
-              </Button>
+            {/* Button Container with Roll and Categories */}
+            <div className="buttons-grid">
+              <div className="roll-button-wrapper">
+                <Button
+                  variant="primary"
+                  size="lg"
+                  onClick={handleRandomQuestion}
+                  onMouseEnter={() => setIsButtonHovered(true)}
+                  onMouseLeave={() => setIsButtonHovered(false)}
+                  className={`random-button ${isShaking ? "shaking" : ""}`}
+                  disabled={isShaking}
+                >
+                  {getButtonText()}
+                </Button>
+              </div>
+
+              <div className="category-buttons">
+                <Button
+                  variant={
+                    category === "developer" ? "primary" : "outline-primary"
+                  }
+                  onClick={() => handleCategoryChange("developer")}
+                  className="category-btn"
+                >
+                  Developer
+                </Button>
+                <Button
+                  variant={
+                    category === "devops" ? "primary" : "outline-primary"
+                  }
+                  onClick={() => handleCategoryChange("devops")}
+                  className="category-btn"
+                >
+                  DevOps
+                </Button>
+                <Button
+                  variant={category === "uiux" ? "primary" : "outline-primary"}
+                  onClick={() => handleCategoryChange("uiux")}
+                  className="category-btn"
+                >
+                  UI/UX
+                </Button>
+                <Button
+                  variant={category === "ml" ? "primary" : "outline-primary"}
+                  onClick={() => handleCategoryChange("ml")}
+                  className="category-btn"
+                >
+                  Machine Learning
+                </Button>
+              </div>
             </div>
 
             {/* Selected Question Display */}
@@ -147,7 +200,7 @@ function App() {
                 <div className="question-content">
                   <span className="question-num">{selectedQuestion + 1})</span>
                   <span className="question-title">
-                    {interviewQuestions[selectedQuestion].question}
+                    {currentQuestions[selectedQuestion].question}
                   </span>
                 </div>
               </div>
@@ -203,7 +256,7 @@ function App() {
             {showAnswer && selectedQuestion !== null && (
               <div className="answer-card">
                 <h5>Answer:</h5>
-                <p>{interviewQuestions[selectedQuestion].answer}</p>
+                <p>{currentQuestions[selectedQuestion].answer}</p>
               </div>
             )}
           </div>
@@ -228,7 +281,7 @@ function App() {
               activeKey={activeKey}
               onSelect={(key) => setActiveKey(key)}
             >
-              {interviewQuestions.map((item, index) => (
+              {currentQuestions.map((item, index) => (
                 <Accordion.Item
                   eventKey={item.id.toString()}
                   key={item.id}
