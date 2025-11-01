@@ -344,6 +344,15 @@
   color: #667eea;
   border-color: white;
 }
+/* Compact mode after first roll */
+.app-container.compact {
+  padding: 1rem 2rem;
+}
+
+.app-container.compact .content-wrapper {
+  margin-top: 0;
+}
+
 
 
 /* Animations */

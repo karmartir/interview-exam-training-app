@@ -13,6 +13,7 @@ function App() {
   const [questionHistory, setQuestionHistory] = useState([]);
   const [answeredCount, setAnsweredCount] = useState(0);
   const [isButtonHovered, setIsButtonHovered] = useState(false);
+  const [hasRolled, setHasRolled] = useState(false);
 
   // Timer effect
   useEffect(() => {
@@ -30,6 +31,7 @@ function App() {
     setShowAnswer(false);
     setTimer(0);
     setIsTimerRunning(false);
+    setHasRolled(true);
 
     setTimeout(() => {
       const randomIndex = Math.floor(Math.random() * interviewQuestions.length);
@@ -85,16 +87,19 @@ function App() {
     setShowAnswer(false);
     setTimer(0);
     setIsTimerRunning(false);
+    setHasRolled(false);
   };
 
   return (
-    <div className="app-container">
-      <header className="app-header">
-        <h1>Interview Questions Practice</h1>
-        <p className="subtitle">
-          Prepare for your next interview with common questions and answers
-        </p>
-      </header>
+    <div className={`app-container ${hasRolled ? "compact" : ""}`}>
+      {!hasRolled && (
+        <header className="app-header">
+          <h1>Interview Questions Practice</h1>
+          <p className="subtitle">
+            Prepare for your next interview with common questions and answers
+          </p>
+        </header>
+      )}
 
       <div className="content-wrapper">
         <div className="two-column-layout">
@@ -201,7 +206,10 @@ function App() {
                 <p>{interviewQuestions[selectedQuestion].answer}</p>
               </div>
             )}
+          </div>
 
+          {/* RIGHT COLUMN - Accordion */}
+          <div className="right-column">
             {/* Question History */}
             {questionHistory.length > 0 && (
               <div className="history-section">
@@ -215,10 +223,7 @@ function App() {
                 </div>
               </div>
             )}
-          </div>
 
-          {/* RIGHT COLUMN - Accordion */}
-          <div className="right-column">
             <Accordion
               activeKey={activeKey}
               onSelect={(key) => setActiveKey(key)}
