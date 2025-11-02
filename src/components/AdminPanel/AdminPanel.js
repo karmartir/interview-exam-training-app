@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Modal, Form, Alert, Button, Card } from "react-bootstrap";
-import { interviewQuestions as defaultQuestions } from "./questionsData";
+import { interviewQuestions as defaultQuestions } from "../../questionsData";
 import { toast } from "react-toastify";
 import "./AdminPanel.css";
 
@@ -25,7 +25,7 @@ function AdminPanel() {
     // Check which data source is active
     const useCustomData = localStorage.getItem("useCustomData") === "true";
     if (useCustomData) {
-      const myQuestions = require("./my_questionsData").interviewQuestions;
+      const myQuestions = require("../../my_questionsData").interviewQuestions;
       return myQuestions;
     }
 
