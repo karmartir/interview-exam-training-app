@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Modal, Form, Alert, Button, Card, Accordion } from "react-bootstrap";
+import { Modal, Form, Alert, Button, Card } from "react-bootstrap";
 import { interviewQuestions as defaultQuestions } from "./questionsData";
 import "./AdminPanel.css";
 
@@ -236,7 +236,7 @@ function AdminPanel() {
                   <li>
                     <strong>Default Password:</strong> Your default admin
                     password is "1234", but if you already here, that means you
-                    know that, haha
+                    know that, right?
                   </li>
                 </ul>
               </Alert>
