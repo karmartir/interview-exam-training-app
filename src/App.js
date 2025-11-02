@@ -4,6 +4,8 @@ import { useState, useEffect, useCallback } from "react";
 import { interviewQuestions } from "./questionsData";
 import { interviewQuestions as myInterviewQuestions } from "./my_questionsData";
 import AdminPanel from "./AdminPanel";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [activeKey, setActiveKey] = useState(null);
@@ -68,15 +70,25 @@ function App() {
       // Clear any edited questions so it uses the base data
       localStorage.removeItem("interviewQuestions");
 
-      // Show notification
-      alert(
+      // Show toast notification
+      toast.success(
         newUseCustom
-          ? "Switched to my_questionsData.js ✓"
-          : "Switched back to questionsData.js ✓"
+          ? "✓ Switched to my_questionsData.js"
+          : "✓ Switched back to questionsData.js",
+        {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        }
       );
 
-      // Reload
-      window.location.reload();
+      // Reload after toast
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     } else {
       // Increment count
       const newCount = clickCount + 1;
@@ -92,15 +104,25 @@ function App() {
         // Clear any edited questions so it uses the base data
         localStorage.removeItem("interviewQuestions");
 
-        // Show notification
-        alert(
+        // Show toast notification
+        toast.success(
           newUseCustom
-            ? "Switched to my_questionsData.js ✓"
-            : "Switched back to questionsData.js ✓"
+            ? "✓ Switched to my_questionsData.js"
+            : "✓ Switched back to questionsData.js",
+          {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          }
         );
 
-        // Reload
-        window.location.reload();
+        // Reload after toast
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
       }
     }
   };
@@ -169,6 +191,11 @@ function App() {
     setIsTimerRunning(false);
     setHasRolled(false);
     setCategory("developer");
+
+    toast.info("Progress reset", {
+      position: "top-right",
+      autoClose: 2000,
+    });
   }, []);
 
   const categories = [
@@ -181,6 +208,9 @@ function App() {
 
   return (
     <div className={`app-container ${hasRolled ? "compact" : ""}`}>
+      {/* Toast Container */}
+      <ToastContainer />
+
       {!hasRolled && (
         <header className="app-header">
           <h1>

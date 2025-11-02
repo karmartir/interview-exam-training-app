@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Modal, Form, Alert, Button, Card } from "react-bootstrap";
 import { interviewQuestions as defaultQuestions } from "./questionsData";
+import { toast } from "react-toastify";
 import "./AdminPanel.css";
 
 function AdminPanel() {
@@ -48,8 +49,16 @@ function AdminPanel() {
       setShowPasswordModal(false);
       setShowAdminPanel(true);
       setPasswordError("");
+      toast.success("✓ Access granted", {
+        position: "top-center",
+        autoClose: 1500,
+      });
     } else {
       setPasswordError("Incorrect password");
+      toast.error("✗ Incorrect password", {
+        position: "top-center",
+        autoClose: 2000,
+      });
     }
   };
 
@@ -70,6 +79,11 @@ function AdminPanel() {
     setEditingQuestion({
       categoryKey: activeCategory,
       index: newIndex,
+    });
+
+    toast.info("New question added - scroll down to edit", {
+      position: "top-right",
+      autoClose: 2000,
     });
 
     // Scroll to the new question after it renders
@@ -101,6 +115,11 @@ function AdminPanel() {
       );
 
       setQuestions(updatedQuestions);
+
+      toast.info("Question deleted", {
+        position: "top-right",
+        autoClose: 2000,
+      });
     }
   };
 
@@ -120,11 +139,19 @@ function AdminPanel() {
       console.log("Questions saved to localStorage:", questions);
       setSaveSuccess(true);
 
+      toast.success("✓ Questions saved successfully!", {
+        position: "top-center",
+        autoClose: 1500,
+      });
+
       setTimeout(() => {
         window.location.reload();
       }, 1500);
     } catch (error) {
-      alert("Failed to save. Please try again.");
+      toast.error("Failed to save. Please try again.", {
+        position: "top-center",
+        autoClose: 3000,
+      });
     }
   };
 
@@ -134,7 +161,11 @@ function AdminPanel() {
     ) {
       localStorage.removeItem("interviewQuestions");
       setQuestions(getQuestions());
-      alert("Reset successful! Click 'Save All Changes' to apply.");
+
+      toast.success("Reset successful! Click 'Save All Changes' to apply.", {
+        position: "top-center",
+        autoClose: 3000,
+      });
     }
   };
 
