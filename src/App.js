@@ -1,6 +1,6 @@
 import { Accordion, Button } from "react-bootstrap";
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { interviewQuestions } from "./questionsData";
 
 function App() {
@@ -20,16 +20,16 @@ function App() {
 
   // Timer effect
   useEffect(() => {
-    let interval;
-    if (isTimerRunning) {
-      interval = setInterval(() => {
-        setTimer((prev) => prev + 1);
-      }, 1000);
-    }
+    if (!isTimerRunning) return;
+
+    const interval = setInterval(() => {
+      setTimer((prev) => prev + 1);
+    }, 1000);
+
     return () => clearInterval(interval);
   }, [isTimerRunning]);
 
-  const handleRandomQuestion = () => {
+  const handleRandomQuestion = useCallback(() => {
     setIsShaking(true);
     setShowAnswer(false);
     setTimer(0);
@@ -42,14 +42,13 @@ function App() {
       setActiveKey(null);
       setIsShaking(false);
 
-      // Add to history if not already there
-      if (!questionHistory.includes(randomIndex)) {
-        setQuestionHistory([...questionHistory, randomIndex]);
-      }
+      setQuestionHistory((prev) =>
+        prev.includes(randomIndex) ? prev : [...prev, randomIndex]
+      );
     }, 500);
-  };
+  }, [currentQuestions.length]);
 
-  const handleCategoryChange = (newCategory) => {
+  const handleCategoryChange = useCallback((newCategory) => {
     setCategory(newCategory);
     setSelectedQuestion(null);
     setQuestionHistory([]);
@@ -58,43 +57,34 @@ function App() {
     setTimer(0);
     setIsTimerRunning(false);
     setActiveKey(null);
-  };
+  }, []);
 
-  const handleStartTimer = () => {
-    setIsTimerRunning(true);
-  };
-
-  const handleStopTimer = () => {
-    setIsTimerRunning(false);
-  };
-
-  const handleShowAnswer = () => {
-    setShowAnswer(!showAnswer);
+  const handleShowAnswer = useCallback(() => {
+    setShowAnswer((prev) => !prev);
     if (!showAnswer && selectedQuestion !== null) {
-      setAnsweredCount(answeredCount + 1);
-      handleStopTimer();
+      setAnsweredCount((prev) => prev + 1);
+      setIsTimerRunning(false);
     }
-  };
+  }, [showAnswer, selectedQuestion]);
+
+  const handleTimerReset = useCallback(() => {
+    setTimer(0);
+    setIsTimerRunning(false);
+  }, []);
 
   const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${mins.toString().padStart(2, "0")}:${secs
-      .toString()
-      .padStart(2, "0")}`;
+    return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
   };
 
   const getButtonText = () => {
-    if (selectedQuestion === null) {
-      return "🎲 Press to choose a question";
-    }
-    if (isButtonHovered) {
-      return "🎲 Roll again...";
-    }
+    if (selectedQuestion === null) return "🎲 Press to choose a question";
+    if (isButtonHovered) return "🎲 Roll again...";
     return `Question ${selectedQuestion + 1} selected`;
   };
 
-  const resetProgress = () => {
+  const resetProgress = useCallback(() => {
     setQuestionHistory([]);
     setAnsweredCount(0);
     setSelectedQuestion(null);
@@ -103,7 +93,15 @@ function App() {
     setIsTimerRunning(false);
     setHasRolled(false);
     setCategory("developer");
-  };
+  }, []);
+
+  const categories = [
+    { key: "developer", label: "Developer" },
+    { key: "devops", label: "DevOps" },
+    { key: "uiux", label: "UI/UX" },
+    { key: "ml", label: "Machine Learning" },
+    { key: "softskills", label: "Soft Skills" },
+  ];
 
   return (
     <div className={`app-container ${hasRolled ? "compact" : ""}`}>
@@ -118,7 +116,7 @@ function App() {
 
       <div className="content-wrapper">
         <div className="two-column-layout">
-          {/* LEFT COLUMN - Controls and Info */}
+          {/* LEFT COLUMN */}
           <div className="left-column">
             {/* Progress Tracker */}
             <div className="progress-tracker">
@@ -141,7 +139,7 @@ function App() {
               </Button>
             </div>
 
-            {/* Button Container with Roll and Categories */}
+            {/* Buttons Grid */}
             <div className="buttons-grid">
               <div className="roll-button-wrapper">
                 <Button
@@ -158,47 +156,16 @@ function App() {
               </div>
 
               <div className="category-buttons">
-                <Button
-                  variant={
-                    category === "developer" ? "primary" : "outline-primary"
-                  }
-                  onClick={() => handleCategoryChange("developer")}
-                  className="category-btn"
-                >
-                  Developer
-                </Button>
-                <Button
-                  variant={
-                    category === "devops" ? "primary" : "outline-primary"
-                  }
-                  onClick={() => handleCategoryChange("devops")}
-                  className="category-btn"
-                >
-                  DevOps
-                </Button>
-                <Button
-                  variant={category === "uiux" ? "primary" : "outline-primary"}
-                  onClick={() => handleCategoryChange("uiux")}
-                  className="category-btn"
-                >
-                  UI/UX
-                </Button>
-                <Button
-                  variant={category === "ml" ? "primary" : "outline-primary"}
-                  onClick={() => handleCategoryChange("ml")}
-                  className="category-btn"
-                >
-                  Machine Learning
-                </Button>
-                <Button
-                  variant={
-                    category === "softskills" ? "primary" : "outline-primary"
-                  }
-                  onClick={() => handleCategoryChange("softskills")}
-                  className="category-btn"
-                >
-                  Soft Skills
-                </Button>
+                {categories.map(({ key, label }) => (
+                  <Button
+                    key={key}
+                    variant={category === key ? "primary" : "outline-primary"}
+                    onClick={() => handleCategoryChange(key)}
+                    className="category-btn"
+                  >
+                    {label}
+                  </Button>
+                ))}
               </div>
             </div>
 
@@ -224,7 +191,7 @@ function App() {
                     <Button
                       variant="success"
                       size="sm"
-                      onClick={handleStartTimer}
+                      onClick={() => setIsTimerRunning(true)}
                       disabled={isTimerRunning}
                     >
                       ▶ Start
@@ -232,7 +199,7 @@ function App() {
                     <Button
                       variant="warning"
                       size="sm"
-                      onClick={handleStopTimer}
+                      onClick={() => setIsTimerRunning(false)}
                       disabled={!isTimerRunning}
                     >
                       ⏸ Pause
@@ -240,10 +207,7 @@ function App() {
                     <Button
                       variant="danger"
                       size="sm"
-                      onClick={() => {
-                        setTimer(0);
-                        setIsTimerRunning(false);
-                      }}
+                      onClick={handleTimerReset}
                     >
                       ⏹ Reset
                     </Button>
@@ -261,7 +225,7 @@ function App() {
               </div>
             )}
 
-            {/* Show answer in a card if button clicked */}
+            {/* Answer Card */}
             {showAnswer && selectedQuestion !== null && (
               <div className="answer-card">
                 <h5>Answer:</h5>
@@ -270,7 +234,7 @@ function App() {
             )}
           </div>
 
-          {/* RIGHT COLUMN - Accordion */}
+          {/* RIGHT COLUMN */}
           <div className="right-column">
             {/* Question History */}
             {questionHistory.length > 0 && (
@@ -286,13 +250,10 @@ function App() {
               </div>
             )}
 
-            <Accordion
-              activeKey={activeKey}
-              onSelect={(key) => setActiveKey(key)}
-            >
+            <Accordion activeKey={activeKey} onSelect={setActiveKey}>
               {currentQuestions.map((item, index) => (
                 <Accordion.Item
-                  eventKey={item.id.toString()}
+                  eventKey={String(item.id)}
                   key={item.id}
                   className={
                     item.id === selectedQuestion ? "selected-question" : ""
