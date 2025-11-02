@@ -9,6 +9,13 @@ function PasswordModal({
   passwordError,
   onSubmit,
 }) {
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault(); // Prevent form submission
+      onSubmit();
+    }
+  };
+
   return (
     <Modal show={show} onHide={onHide} centered>
       <Modal.Header closeButton>
@@ -22,7 +29,7 @@ function PasswordModal({
             placeholder="Enter password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            onKeyPress={(e) => e.key === "Enter" && onSubmit()}
+            onKeyDown={handleKeyDown}
           />
         </Form.Group>
         {passwordError && (
