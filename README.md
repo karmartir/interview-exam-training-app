@@ -56,15 +56,15 @@ A modern, interactive web application designed to help you prepare for technical
 
 ## 🚀 Demo
 
-🔗 **[Live Demo](https://your-netlify-url.netlify.app)** *(Replace with your actual URL)*
+🔗 **[Live Demo](https://interview-exam-training-app.netlify.app/)** 
 
 ### Screenshots
 
 #### Main Interface
-![Main Interface](./screenshots/main.png) *(Add screenshot)*
+![Main Interface](./screenshots/main.png) 
 
 #### Admin Panel
-![Admin Panel](./screenshots/admin.png) *(Add screenshot)*
+![Admin Panel](./screenshots/admin.png)
 
 ---
 
@@ -78,7 +78,7 @@ A modern, interactive web application designed to help you prepare for technical
 ### Steps
 
 1. **Clone the repository**
-git clone https://github.com/yourusername/interview-questions-app.git
+git clone https://github.com/karmartir/interview-exam-training-app.git
 cd interview-questions-app
 
 
