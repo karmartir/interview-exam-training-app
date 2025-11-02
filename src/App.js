@@ -1,7 +1,8 @@
 import { Accordion, Button } from "react-bootstrap";
 import "./App.css";
 import { useState, useEffect, useCallback } from "react";
-import { interviewQuestions } from "./questionsData";
+import { getInterviewQuestions } from "./AdminPanel";
+import AdminPanel from "./AdminPanel";
 
 function App() {
   const [activeKey, setActiveKey] = useState(null);
@@ -16,6 +17,7 @@ function App() {
   const [hasRolled, setHasRolled] = useState(false);
   const [category, setCategory] = useState("developer");
 
+  const interviewQuestions = getInterviewQuestions();
   const currentQuestions = interviewQuestions[category];
 
   // Timer effect
@@ -130,13 +132,16 @@ function App() {
                 <span className="progress-label">Answers Viewed:</span>
                 <span className="progress-value">{answeredCount}</span>
               </div>
-              <Button
-                variant="outline-secondary"
-                size="sm"
-                onClick={resetProgress}
-              >
-                Reset Progress
-              </Button>
+              <div className="progress-buttons">
+                <AdminPanel />
+                <Button
+                  variant="outline-secondary"
+                  size="sm"
+                  onClick={resetProgress}
+                >
+                  Reset Progress
+                </Button>
+              </div>
             </div>
 
             {/* Buttons Grid */}
