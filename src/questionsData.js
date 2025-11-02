@@ -164,4 +164,54 @@ export const interviewQuestions = {
         "I use multiple metrics depending on the problem: classification (accuracy, precision, recall, F1-score, ROC-AUC), regression (MAE, RMSE, R²), and custom business metrics. I always use cross-validation to ensure robustness. For production models, I monitor performance over time, track prediction distribution shifts, and set up alerts for degradation. I also conduct error analysis to understand failure modes and improve the model.",
     },
   ],
+  softskills: [
+    {
+      id: 0,
+      question: "How do you handle conflicts with team members?",
+      answer:
+        "When facing conflict, I stay calm, listen to others, and focus on finding a solution. During a sprint, some team members struggled with deadlines. I organized a short meeting, identified blockers, and adjusted tasks to prioritize key features. This helped us finish on time. Afterward, we improved communication and task tracking to prevent similar issues.",
+    },
+    {
+      id: 1,
+      question: "Describe a time you had to work with a difficult person",
+      answer:
+        "I once worked with a colleague who was resistant to feedback. Instead of confronting them directly, I scheduled a one-on-one to understand their perspective. I discovered they felt their ideas weren't being heard. By actively listening and incorporating their suggestions where appropriate, we built mutual respect and collaboration improved significantly.",
+    },
+    {
+      id: 2,
+      question: "How do you prioritize tasks when everything is urgent?",
+      answer:
+        "I assess impact and dependencies first. I use the Eisenhower Matrix to categorize tasks by urgency and importance. I communicate with stakeholders to understand true priorities and negotiate deadlines when needed. I focus on high-impact tasks first, delegate when possible, and break large tasks into smaller milestones to maintain progress visibility.",
+    },
+    {
+      id: 3,
+      question: "Tell me about a time you failed and what you learned",
+      answer:
+        "Early in my career, I underestimated the time needed for a feature, causing a deadline miss. I learned the importance of realistic estimation and buffer time. Now I break tasks into smaller chunks, track progress daily, communicate early if delays occur, and use historical data to improve estimates. This failure taught me accountability and proactive communication.",
+    },
+    {
+      id: 4,
+      question: "How do you handle receiving constructive criticism?",
+      answer:
+        "I view criticism as an opportunity to grow. I listen actively without becoming defensive, ask clarifying questions to fully understand the feedback, and thank the person for their input. I reflect on the feedback objectively, create an action plan to address valid points, and follow up to show improvement. This approach has helped me develop professionally and build stronger relationships.",
+    },
+    {
+      id: 5,
+      question: "Describe your leadership style",
+      answer:
+        "My leadership style is collaborative and empowering. I believe in leading by example, setting clear expectations, and giving team members autonomy to solve problems. I provide support and resources, encourage open communication, and celebrate successes. When challenges arise, I facilitate problem-solving discussions rather than dictating solutions. I focus on developing people's strengths and fostering a positive team environment.",
+    },
+    {
+      id: 6,
+      question: "How do you adapt to change?",
+      answer:
+        "I embrace change as an opportunity for growth. When faced with change, I first seek to understand the reasoning and expected outcomes. I stay flexible, ask questions, and identify how I can contribute positively. For example, when my team switched to remote work, I proactively learned collaboration tools, established clear communication routines, and helped teammates adapt, resulting in maintained productivity.",
+    },
+    {
+      id: 7,
+      question: "Tell me about a time you went above and beyond",
+      answer:
+        "During a critical product launch, our QA engineer fell ill. Without being asked, I took initiative to perform thorough testing, created detailed bug reports, and worked extra hours to ensure quality. I documented the process to help the team in future situations. The launch was successful, and my proactive approach was recognized. I believe in ownership and doing what's needed for team success.",
+    },
+  ],
 };

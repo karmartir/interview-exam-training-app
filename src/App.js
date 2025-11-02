@@ -190,6 +190,15 @@ function App() {
                 >
                   Machine Learning
                 </Button>
+                <Button
+                  variant={
+                    category === "softskills" ? "primary" : "outline-primary"
+                  }
+                  onClick={() => handleCategoryChange("softskills")}
+                  className="category-btn"
+                >
+                  Soft Skills
+                </Button>
               </div>
             </div>
 
