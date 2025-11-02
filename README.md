@@ -199,6 +199,50 @@ answer: "Your custom answer"
 
 
 ---
+## 🔐 Environment Variables
+
+This project uses environment variables for sensitive data.
+
+### Local Development
+
+1. **Create `.env` file** in the project root:
+cp .env.example .env
+
+2. **Edit `.env`** with your values:
+REACT_APP_ADMIN_PASSWORD=your_password_here
+
+3. **Restart dev server** to apply changes:
+npm start
+
+### Production (Netlify)
+
+1. Go to **Site settings** → **Build & deploy** → **Environment**
+2. Add the following variables:
+- `REACT_APP_ADMIN_PASSWORD` - Your admin password
+- `REACT_APP_SECRET_CLICK_COUNT` - Number of clicks for secret feature (default: 3)
+- `REACT_APP_NAME` - App name
+- `REACT_APP_AUTHOR` - Your name/company
+
+### Available Variables
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `REACT_APP_ADMIN_PASSWORD` | Admin panel password | `1234` |
+| `REACT_APP_SECRET_CLICK_COUNT` | Clicks to toggle data source | `3` |
+| `REACT_APP_NAME` | Application name | `Interview Questions Practice` |
+| `REACT_APP_AUTHOR` | Author name | `Kar-ma.dev` |
+| `REACT_APP_TOAST_SUCCESS_DURATION` | Success toast duration (ms) | `2000` |
+| `REACT_APP_TOAST_ERROR_DURATION` | Error toast duration (ms) | `3000` |
+| `REACT_APP_TOAST_INFO_DURATION` | Info toast duration (ms) | `2000` |
+
+### ⚠️ Important Notes
+
+- **Never commit `.env`** to GitHub (already in `.gitignore`)
+- **Use `.env.example`** as a template for other developers
+- **Restart dev server** after changing `.env` values
+- **Re-deploy on Netlify** after changing environment variables
+
+
 
 ## 📁 Project Structure
 

@@ -1,7 +1,15 @@
+// Get durations from environment or use defaults
+const SUCCESS_DURATION =
+  parseInt(process.env.REACT_APP_TOAST_SUCCESS_DURATION) || 2000;
+const ERROR_DURATION =
+  parseInt(process.env.REACT_APP_TOAST_ERROR_DURATION) || 3000;
+const INFO_DURATION =
+  parseInt(process.env.REACT_APP_TOAST_INFO_DURATION) || 2000;
+
 export const TOAST_CONFIG = {
   success: {
     position: "top-center",
-    autoClose: 2000,
+    autoClose: SUCCESS_DURATION,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
@@ -9,7 +17,7 @@ export const TOAST_CONFIG = {
   },
   error: {
     position: "top-center",
-    autoClose: 3000,
+    autoClose: ERROR_DURATION,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
@@ -17,7 +25,7 @@ export const TOAST_CONFIG = {
   },
   info: {
     position: "top-right",
-    autoClose: 2000,
+    autoClose: INFO_DURATION,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,

@@ -1,11 +1,12 @@
-import React from "react";
+import React, { memo } from "react";
+import { APP_AUTHOR } from "../constants/categories";
 
-function Footer() {
+const Footer = memo(function Footer() {
   return (
     <footer className="app-footer">
-      <p>Kar-Ma.dev &copy; {new Date().getFullYear()} All rights reserved.</p>
+      <p>{APP_AUTHOR} registered. All rights reserved.</p>
     </footer>
   );
-}
+});
 
 export default Footer;

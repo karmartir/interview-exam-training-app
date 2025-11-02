@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import { interviewQuestions } from "../questionsData";
 import { interviewQuestions as myInterviewQuestions } from "../my_questionsData";
 import { TOAST_CONFIG } from "../constants/toastConfig";
+import { SECRET_CLICK_COUNT } from "../constants/categories";
 
 export const useDataSource = () => {
   const [clickCount, setClickCount] = useState(() => {
@@ -13,7 +14,7 @@ export const useDataSource = () => {
   });
 
   const handleSecretClick = () => {
-    if (clickCount === 3) {
+    if (clickCount === SECRET_CLICK_COUNT) {
       // If already showing "!!!", toggle back
       const newUseCustom = !useCustomData;
       setUseCustomData(newUseCustom);
@@ -44,8 +45,8 @@ export const useDataSource = () => {
       setClickCount(newCount);
       localStorage.setItem("clickCount", newCount.toString());
 
-      if (newCount === 3) {
-        // First time reaching 3
+      if (newCount === SECRET_CLICK_COUNT) {
+        // First time reaching threshold
         const newUseCustom = !useCustomData;
         setUseCustomData(newUseCustom);
         localStorage.setItem("useCustomData", newUseCustom.toString());
