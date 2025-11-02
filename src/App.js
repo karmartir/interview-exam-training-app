@@ -3,6 +3,10 @@ import { useState, useCallback } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+// Constants
+import { CATEGORIES, DEFAULT_CATEGORY } from "./constants/categories";
+import { TOAST_CONFIG } from "./constants/toastConfig";
+
 // Hooks
 import { useDataSource } from "./hooks/useDataSource";
 import { useTimer } from "./hooks/useTimer";
@@ -21,7 +25,7 @@ import QuestionAccordion from "./components/QuestionAccordion";
 import Footer from "./components/Footer";
 
 function App() {
-  const [category, setCategory] = useState("developer");
+  const [category, setCategory] = useState(DEFAULT_CATEGORY);
   const [showAnswer, setShowAnswer] = useState(false);
 
   // Custom Hooks
@@ -79,24 +83,13 @@ function App() {
   // Reset progress with toast
   const resetProgress = useCallback(() => {
     baseResetProgress();
-    setCategory("developer");
+    setCategory(DEFAULT_CATEGORY);
     setShowAnswer(false);
     setTimer(0);
     setIsTimerRunning(false);
 
-    toast.info("Progress reset", {
-      position: "top-right",
-      autoClose: 2000,
-    });
+    toast.info("Progress reset", TOAST_CONFIG.info);
   }, [baseResetProgress, setTimer, setIsTimerRunning]);
-
-  const categories = [
-    { key: "developer", label: "Developer" },
-    { key: "devops", label: "DevOps" },
-    { key: "uiux", label: "UI/UX" },
-    { key: "ml", label: "Machine Learning" },
-    { key: "softskills", label: "Soft Skills" },
-  ];
 
   return (
     <div className={`app-container ${hasRolled ? "compact" : ""}`}>
@@ -124,7 +117,7 @@ function App() {
                 selectedQuestion={selectedQuestion}
               />
               <CategoryButtons
-                categories={categories}
+                categories={CATEGORIES}
                 category={category}
                 handleCategoryChange={handleCategoryChange}
               />

@@ -1,6 +1,6 @@
-import React from "react";
+import React, { memo } from "react";
 
-function Header({ clickCount, handleSecretClick }) {
+const Header = memo(function Header({ clickCount, handleSecretClick }) {
   return (
     <header className="app-header">
       <h1>
@@ -18,6 +18,6 @@ function Header({ clickCount, handleSecretClick }) {
       </p>
     </header>
   );
-}
+});
 
 export default Header;

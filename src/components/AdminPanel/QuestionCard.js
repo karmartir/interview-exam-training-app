@@ -1,8 +1,8 @@
-import React from "react";
+import React, { memo } from "react";
 import { Card, Button } from "react-bootstrap";
 import QuestionEditor from "./QuestionEditor";
 
-function QuestionCard({
+const QuestionCard = memo(function QuestionCard({
   question,
   index,
   categoryKey,
@@ -61,6 +61,6 @@ function QuestionCard({
       </Card.Body>
     </Card>
   );
-}
+});
 
 export default QuestionCard;

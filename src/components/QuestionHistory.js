@@ -1,6 +1,6 @@
-import React from "react";
+import React, { memo } from "react";
 
-function QuestionHistory({ questionHistory }) {
+const QuestionHistory = memo(function QuestionHistory({ questionHistory }) {
   if (questionHistory.length === 0) return null;
 
   return (
@@ -15,6 +15,6 @@ function QuestionHistory({ questionHistory }) {
       </div>
     </div>
   );
-}
+});
 
 export default QuestionHistory;

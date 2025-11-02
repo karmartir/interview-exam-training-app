@@ -2,6 +2,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { interviewQuestions } from "../questionsData";
 import { interviewQuestions as myInterviewQuestions } from "../my_questionsData";
+import { TOAST_CONFIG } from "../constants/toastConfig";
 
 export const useDataSource = () => {
   const [clickCount, setClickCount] = useState(() => {
@@ -30,14 +31,7 @@ export const useDataSource = () => {
         newUseCustom
           ? "✓ Switched to my_questionsData.js"
           : "✓ Switched back to questionsData.js",
-        {
-          position: "top-center",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        }
+        TOAST_CONFIG.success
       );
 
       // Reload after toast
@@ -64,14 +58,7 @@ export const useDataSource = () => {
           newUseCustom
             ? "✓ Switched to my_questionsData.js"
             : "✓ Switched back to questionsData.js",
-          {
-            position: "top-center",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-          }
+          TOAST_CONFIG.success
         );
 
         // Reload after toast

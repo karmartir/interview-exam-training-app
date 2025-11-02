@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { interviewQuestions as defaultQuestions } from "../questionsData";
+import { TOAST_CONFIG } from "../constants/toastConfig";
 
 export const useAdminQuestions = () => {
   const [questions, setQuestions] = useState({});
@@ -48,10 +49,7 @@ export const useAdminQuestions = () => {
       index: newIndex,
     });
 
-    toast.info("New question added - scroll down to edit", {
-      position: "top-right",
-      autoClose: 2000,
-    });
+    toast.info("New question added - scroll down to edit", TOAST_CONFIG.info);
 
     // Scroll to the new question after it renders
     setTimeout(() => {
@@ -83,10 +81,7 @@ export const useAdminQuestions = () => {
 
       setQuestions(updatedQuestions);
 
-      toast.info("Question deleted", {
-        position: "top-right",
-        autoClose: 2000,
-      });
+      toast.info("Question deleted", TOAST_CONFIG.info);
     }
   };
 
@@ -107,7 +102,7 @@ export const useAdminQuestions = () => {
       setSaveSuccess(true);
 
       toast.success("✓ Questions saved successfully!", {
-        position: "top-center",
+        ...TOAST_CONFIG.success,
         autoClose: 1500,
       });
 
@@ -115,10 +110,7 @@ export const useAdminQuestions = () => {
         window.location.reload();
       }, 1500);
     } catch (error) {
-      toast.error("Failed to save. Please try again.", {
-        position: "top-center",
-        autoClose: 3000,
-      });
+      toast.error("Failed to save. Please try again.", TOAST_CONFIG.error);
     }
   };
 
@@ -129,10 +121,10 @@ export const useAdminQuestions = () => {
       localStorage.removeItem("interviewQuestions");
       setQuestions(getQuestions());
 
-      toast.success("Reset successful! Click 'Save All Changes' to apply.", {
-        position: "top-center",
-        autoClose: 3000,
-      });
+      toast.success(
+        "Reset successful! Click 'Save All Changes' to apply.",
+        TOAST_CONFIG.success
+      );
     }
   };
 

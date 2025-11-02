@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Button, Alert } from "react-bootstrap";
 import { toast } from "react-toastify";
+import { CATEGORIES, ADMIN_PASSWORD } from "../../constants/categories";
+import { TOAST_CONFIG } from "../../constants/toastConfig";
 import { useAdminQuestions } from "../../hooks/useAdminQuestions";
 import PasswordModal from "./PasswordModal";
 import InstructionsAlert from "./InstructionsAlert";
@@ -38,20 +40,17 @@ function AdminPanel() {
   };
 
   const handlePasswordSubmit = () => {
-    if (password === "1234") {
+    if (password === ADMIN_PASSWORD) {
       setShowPasswordModal(false);
       setShowAdminPanel(true);
       setPasswordError("");
       toast.success("✓ Access granted", {
-        position: "top-center",
+        ...TOAST_CONFIG.success,
         autoClose: 1500,
       });
     } else {
       setPasswordError("Incorrect password");
-      toast.error("✗ Incorrect password", {
-        position: "top-center",
-        autoClose: 2000,
-      });
+      toast.error("✗ Incorrect password", TOAST_CONFIG.error);
     }
   };
 
@@ -59,14 +58,6 @@ function AdminPanel() {
     setShowAdminPanel(false);
     setEditingQuestion(null);
   };
-
-  const categories = [
-    { key: "developer", label: "Developer" },
-    { key: "devops", label: "DevOps" },
-    { key: "uiux", label: "UI/UX" },
-    { key: "ml", label: "Machine Learning" },
-    { key: "softskills", label: "Soft Skills" },
-  ];
 
   return (
     <>
@@ -111,7 +102,7 @@ function AdminPanel() {
 
             {/* Category Tabs */}
             <CategoryTabs
-              categories={categories}
+              categories={CATEGORIES}
               activeCategory={activeCategory}
               setActiveCategory={setActiveCategory}
               questions={questions}
@@ -121,7 +112,7 @@ function AdminPanel() {
             <div className="admin-content">
               <div className="admin-content-header">
                 <h4>
-                  {categories.find((c) => c.key === activeCategory)?.label}{" "}
+                  {CATEGORIES.find((c) => c.key === activeCategory)?.label}{" "}
                   Questions
                 </h4>
                 <Button variant="success" onClick={handleAddQuestion}>

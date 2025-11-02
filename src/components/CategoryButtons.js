@@ -1,7 +1,11 @@
-import React from "react";
+import React, { memo } from "react";
 import { Button } from "react-bootstrap";
 
-function CategoryButtons({ categories, category, handleCategoryChange }) {
+const CategoryButtons = memo(function CategoryButtons({
+  categories,
+  category,
+  handleCategoryChange,
+}) {
   return (
     <div className="category-buttons">
       {categories.map(({ key, label }) => (
@@ -16,6 +20,6 @@ function CategoryButtons({ categories, category, handleCategoryChange }) {
       ))}
     </div>
   );
-}
+});
 
 export default CategoryButtons;
