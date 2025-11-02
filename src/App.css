@@ -452,3 +452,18 @@
     font-size: 1.1rem;
   }
 }
+
+/* Footer */
+.app-footer {
+  text-align: center;
+  color: white;
+  padding: 1.5rem 2rem;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.app-footer p {
+  margin: 0;
+}
+

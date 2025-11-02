@@ -1,7 +1,8 @@
 import { Accordion, Button } from "react-bootstrap";
 import "./App.css";
 import { useState, useEffect, useCallback } from "react";
-import { getInterviewQuestions } from "./AdminPanel";
+import { interviewQuestions } from "./questionsData";
+import { interviewQuestions as myInterviewQuestions } from "./my_questionsData";
 import AdminPanel from "./AdminPanel";
 
 function App() {
@@ -16,9 +17,31 @@ function App() {
   const [isButtonHovered, setIsButtonHovered] = useState(false);
   const [hasRolled, setHasRolled] = useState(false);
   const [category, setCategory] = useState("developer");
+  const [clickCount, setClickCount] = useState(() => {
+    return parseInt(localStorage.getItem("clickCount")) || 0;
+  });
+  const [useCustomData, setUseCustomData] = useState(() => {
+    return localStorage.getItem("useCustomData") === "true";
+  });
 
-  const interviewQuestions = getInterviewQuestions();
-  const currentQuestions = interviewQuestions[category];
+  // Use custom data source or default based on toggle
+  const baseQuestions = useCustomData
+    ? myInterviewQuestions
+    : interviewQuestions;
+
+  // Don't pass baseQuestions, let it load from localStorage
+  const savedQuestions = localStorage.getItem("interviewQuestions");
+  let currentInterviewQuestions;
+
+  if (savedQuestions) {
+    // If user has edited questions, use those
+    currentInterviewQuestions = JSON.parse(savedQuestions);
+  } else {
+    // Otherwise use the selected base (custom or default)
+    currentInterviewQuestions = baseQuestions;
+  }
+
+  const currentQuestions = currentInterviewQuestions[category];
 
   // Timer effect
   useEffect(() => {
@@ -30,6 +53,57 @@ function App() {
 
     return () => clearInterval(interval);
   }, [isTimerRunning]);
+
+  const handleSecretClick = () => {
+    if (clickCount === 3) {
+      // If already showing "!!!", toggle back
+      const newUseCustom = !useCustomData;
+      setUseCustomData(newUseCustom);
+      localStorage.setItem("useCustomData", newUseCustom.toString());
+
+      // Reset count
+      setClickCount(0);
+      localStorage.setItem("clickCount", "0");
+
+      // Clear any edited questions so it uses the base data
+      localStorage.removeItem("interviewQuestions");
+
+      // Show notification
+      alert(
+        newUseCustom
+          ? "Switched to my_questionsData.js ✓"
+          : "Switched back to questionsData.js ✓"
+      );
+
+      // Reload
+      window.location.reload();
+    } else {
+      // Increment count
+      const newCount = clickCount + 1;
+      setClickCount(newCount);
+      localStorage.setItem("clickCount", newCount.toString());
+
+      if (newCount === 3) {
+        // First time reaching 3
+        const newUseCustom = !useCustomData;
+        setUseCustomData(newUseCustom);
+        localStorage.setItem("useCustomData", newUseCustom.toString());
+
+        // Clear any edited questions so it uses the base data
+        localStorage.removeItem("interviewQuestions");
+
+        // Show notification
+        alert(
+          newUseCustom
+            ? "Switched to my_questionsData.js ✓"
+            : "Switched back to questionsData.js ✓"
+        );
+
+        // Reload
+        window.location.reload();
+      }
+    }
+  };
 
   const handleRandomQuestion = useCallback(() => {
     setIsShaking(true);
@@ -109,7 +183,16 @@ function App() {
     <div className={`app-container ${hasRolled ? "compact" : ""}`}>
       {!hasRolled && (
         <header className="app-header">
-          <h1>Interview Questions Practice</h1>
+          <h1>
+            Interview Questions Practic
+            <span
+              onClick={handleSecretClick}
+              style={{ cursor: "default", userSelect: "none" }}
+            >
+              e
+            </span>
+            {clickCount > 0 && "!".repeat(clickCount)}
+          </h1>
           <p className="subtitle">
             Prepare for your next interview with common questions and answers
           </p>
@@ -278,6 +361,11 @@ function App() {
           </div>
         </div>
       </div>
+
+      {/* Footer */}
+      <footer className="app-footer">
+        <p>Kar-ma.dev registered. All rights reserved.</p>
+      </footer>
     </div>
   );
 }

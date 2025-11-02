@@ -3,43 +3,51 @@ export const interviewQuestions = {
     {
       id: 0,
       question: "Tell them about yourself",
-      answer: "Add your answer here in admin mode!",
+      answer:
+        "I'm a Full-Stack Developer with a strong front-end focus. I have over five years of experience in React and Next.js, building high-performance applications with a keen eye for UI/UX. My background in design helps me create intuitive and visually polished interfaces. At DigitalVertex, I work on online applications, optimizing performance and usability. I enjoy solving complex problems and building seamless user experiences. I'm always looking to improve my skills and take on new challenges that push me further as a developer.",
     },
     {
       id: 1,
       question: "What is your recent achievement?",
-      answer: "Add your answer here in admin mode!",
+      answer:
+        "Recently, I built an online store using React and Next.js, managing global state with Context. I focused on performance optimization, improving load times with server-side rendering and efficient state management. As a result, the site's loading time improved by 40%, enhancing user experience and conversion rates.",
     },
     {
       id: 2,
       question: "Why did you leave your last job?",
-      answer: "Add your answer here in admin mode!",
+      answer:
+        "I was laid off due to company downsizing, with several team members affected. Additionally, I felt there were no more growth opportunities, and I wanted to take on bigger challenges.",
     },
     {
       id: 3,
       question: "What is your weakness?",
-      answer: "Add your answer here in admin mode!",
+      answer:
+        "I prefer a quiet environment because my work requires deep focus and attention to detail. Also, I tend to solve problems on my own, but I'm learning to ask for feedback earlier to ensure alignment and save time. I've been actively improving by engaging in more team discussions and leveraging peer reviews.",
     },
     {
       id: 4,
       question: "Where do you see yourself in 5 years?",
-      answer: "Add your answer here in admin mode!",
+      answer:
+        "In five years, I see myself growing as a developer, taking on more complex projects, and deepening my expertise in front-end and full-stack development. I want to keep improving my skills, stay updated with new technologies, and contribute to building high-quality applications.",
     },
     {
       id: 5,
       question: "What are your salary expectations?",
-      answer: "Add your answer here in admin mode!",
+      answer:
+        "I'm open to discussing a fair salary based on the role, my experience, and industry standards. I'd love to learn more about the responsibilities before we align on a number.",
     },
     {
       id: 6,
       question:
         "Describe a time when you had to explain technical issues to a non-technical person",
-      answer: "Add your answer here in admin mode!",
+      answer:
+        "A client once asked why their website was slow. I explained it using an elevator analogy—too many people trying to get in at once slows it down. I told them optimizing images and reducing scripts would help the 'elevator' move faster. This simple explanation helped them understand the issue and the solution.",
     },
     {
       id: 7,
       question: "What strategies do you use to manage stress?",
-      answer: "Add your answer here in admin mode!",
+      answer:
+        "I focus on solving the problem instead of stressing about it. I plan my tasks so I know what to prioritize first. I also stay active to keep my mind fresh. Managing my time well helps me stay calm and handle challenges better. For example, in a recent project with a tight deadline, I broke down tasks, collaborated with my team efficiently, and we successfully delivered ahead of schedule.",
     },
   ],
   devops: [

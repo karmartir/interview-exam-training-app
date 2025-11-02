@@ -17,7 +17,18 @@ function AdminPanel() {
   // Load questions from localStorage or use default
   const getQuestions = () => {
     const saved = localStorage.getItem("interviewQuestions");
-    return saved ? JSON.parse(saved) : defaultQuestions;
+    if (saved) {
+      return JSON.parse(saved);
+    }
+
+    // Check which data source is active
+    const useCustomData = localStorage.getItem("useCustomData") === "true";
+    if (useCustomData) {
+      const myQuestions = require("./my_questionsData").interviewQuestions;
+      return myQuestions;
+    }
+
+    return defaultQuestions;
   };
 
   useEffect(() => {
@@ -122,7 +133,7 @@ function AdminPanel() {
       window.confirm("This will reset ALL questions to default. Are you sure?")
     ) {
       localStorage.removeItem("interviewQuestions");
-      setQuestions(defaultQuestions);
+      setQuestions(getQuestions());
       alert("Reset successful! Click 'Save All Changes' to apply.");
     }
   };
@@ -199,7 +210,6 @@ function AdminPanel() {
             </div>
 
             {/* Instructions */}
-            {/* Instructions */}
             {!instructionsClosed && (
               <Alert variant="info" className="admin-instructions">
                 <button
@@ -232,11 +242,6 @@ function AdminPanel() {
                   </li>
                   <li>
                     <strong>Save:</strong> Click "Save All Changes" when done
-                  </li>
-                  <li>
-                    <strong>Default Password:</strong> Your default admin
-                    password is "1234", but if you already here, that means you
-                    know that, right?
                   </li>
                 </ul>
               </Alert>
@@ -402,17 +407,3 @@ function AdminPanel() {
 }
 
 export default AdminPanel;
-
-// Export function to get questions from localStorage or default
-export const getInterviewQuestions = () => {
-  const saved = localStorage.getItem("interviewQuestions");
-  if (saved) {
-    try {
-      return JSON.parse(saved);
-    } catch (error) {
-      console.error("Error parsing saved questions:", error);
-      return require("./questionsData").interviewQuestions;
-    }
-  }
-  return require("./questionsData").interviewQuestions;
-};
