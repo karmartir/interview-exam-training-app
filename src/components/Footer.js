@@ -4,7 +4,10 @@ import { APP_AUTHOR } from "../constants/categories";
 const Footer = memo(function Footer() {
   return (
     <footer className="app-footer">
-      <p>{APP_AUTHOR} registered. All rights reserved.</p>
+      <p>
+        Copyright &copy; {new Date().getFullYear()}. {APP_AUTHOR}. All rights
+        reserved.
+      </p>
     </footer>
   );
 });
