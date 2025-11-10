@@ -80,10 +80,12 @@ function AdminPanel() {
       {showAdminPanel && (
         <div className="admin-panel-overlay">
           <div className="admin-panel">
-            <div className="admin-header d-flex align-items-center justify-content-between">
-              <h2>📝 Admin Panel - Manage Questions</h2>
+            <div className="admin-header d-flex align-items-center justify-content-between ">
+              <h2 className="d-none d-md-block">
+                📝 Admin Panel - Manage Questions
+              </h2>
 
-              <div>
+              <div className="d-flex align-items-center">
                 <Button
                   variant="light" // White border and text on dark background
                   size="md" // Smaller size to match Close button
