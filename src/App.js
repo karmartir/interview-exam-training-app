@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -44,7 +44,7 @@ function App() {
     hasRolled,
     activeKey,
     setActiveKey,
-    handleRandomQuestion,
+    handleRandomQuestion: baseHandleRandomQuestion,
     resetProgress: baseResetProgress,
   } = useQuestionManager(currentQuestions);
 
@@ -57,6 +57,31 @@ function App() {
     setTimer,
     setIsTimerRunning,
   } = useTimer();
+
+  // Re-wrap the handleRandomQuestion to just call base without toast (toast moved to useEffect)
+  const handleRandomQuestion = useCallback(() => {
+    baseHandleRandomQuestion();
+  }, [baseHandleRandomQuestion]);
+
+  // Show congratulatory toast when all questions are practiced
+  useEffect(() => {
+    if (
+      questionHistory.length === currentQuestions.length &&
+      currentQuestions.length > 0
+    ) {
+      toast.success(
+        `🎉 Congratulations, you answered all questions in ${category} category!`,
+        {
+          position: "top-center",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        }
+      );
+    }
+  }, [questionHistory, currentQuestions.length, category]);
 
   // Category change handler
   const handleCategoryChange = useCallback(
