@@ -80,18 +80,34 @@ function AdminPanel() {
       {showAdminPanel && (
         <div className="admin-panel-overlay">
           <div className="admin-panel">
-            <div className="admin-header">
+            <div className="admin-header d-flex align-items-center justify-content-between">
               <h2>📝 Admin Panel - Manage Questions</h2>
-              <Button variant="danger" onClick={handleCloseAdmin}>
-                ✕ Close
-              </Button>
+
+              <div>
+                <Button
+                  variant="light" // White border and text on dark background
+                  size="md" // Smaller size to match Close button
+                  className="me-2" // Margin right for spacing
+                  onClick={() => setInstructionsClosed(false)}
+                  title="Show Instructions"
+                  aria-label="Show instructions"
+                >
+                  📖 Instructions
+                </Button>
+
+                <Button variant="danger" onClick={handleCloseAdmin}>
+                  ✕ Close
+                </Button>
+              </div>
             </div>
 
             {/* Instructions */}
-            <InstructionsAlert
-              show={!instructionsClosed}
-              onClose={() => setInstructionsClosed(true)}
-            />
+            {!instructionsClosed && (
+              <InstructionsAlert
+                show={!instructionsClosed}
+                onClose={() => setInstructionsClosed(true)}
+              />
+            )}
 
             {/* Success Alert */}
             {saveSuccess && (

@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Alert } from "react-bootstrap";
 
-function InstructionsAlert({ show, onClose }) {
+function InstructionsAlert({ show: showProp, onClose }) {
+  const [show, setShow] = useState(showProp ?? true);
+
+  useEffect(() => {
+    if (!show) return;
+    const timer = setTimeout(() => {
+      setShow(false);
+      if (onClose) onClose();
+    }, 4000);
+    return () => clearTimeout(timer);
+  }, [show, onClose]);
+
   if (!show) return null;
 
   return (
