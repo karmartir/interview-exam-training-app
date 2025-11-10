@@ -12,7 +12,7 @@ function TimerControls({
   handleShowAnswer,
 }) {
   return (
-    <div className="controls-section">
+    <div className="controls-section flex flex-row">
       <div className="timer-section">
         <div className="timer-display">{formatTime(timer)}</div>
         <div className="timer-buttons">
@@ -22,7 +22,7 @@ function TimerControls({
             onClick={startTimer}
             disabled={isTimerRunning}
           >
-            ▶ Start
+            ▶
           </Button>
           <Button
             variant="warning"
@@ -30,10 +30,10 @@ function TimerControls({
             onClick={stopTimer}
             disabled={!isTimerRunning}
           >
-            ⏸ Pause
+            ⏸
           </Button>
           <Button variant="danger" size="sm" onClick={resetTimer}>
-            ⏹ Reset
+            ⏹
           </Button>
         </div>
       </div>

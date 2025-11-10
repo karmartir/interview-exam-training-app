@@ -4,13 +4,13 @@ import { Button } from "react-bootstrap";
 function AdminFooter({ onReset, onSave, onClose }) {
   return (
     <div className="admin-footer">
-      <Button variant="warning" size="lg" onClick={onReset}>
+      <Button variant="warning" size="sm" onClick={onReset}>
         🔄 Reset to Default
       </Button>
-      <Button variant="success" size="lg" onClick={onSave}>
+      <Button variant="success" size="sm" onClick={onSave}>
         💾 Save All Changes
       </Button>
-      <Button variant="secondary" size="lg" onClick={onClose}>
+      <Button variant="secondary" size="sm" onClick={onClose}>
         Cancel
       </Button>
     </div>

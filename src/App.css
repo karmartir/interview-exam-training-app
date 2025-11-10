@@ -12,11 +12,11 @@
 .app-header {
   text-align: center;
   color: white;
-  margin-bottom: 3rem;
+  margin-bottom: 1.2rem;
 }
 
 .app-header h1 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
@@ -29,13 +29,13 @@
 }
 
 .content-wrapper {
-  max-width: 75%;
+  max-width: 95%;
   width: 100%;
   margin: 0 auto;
-  background: white;
+  background: rgb(244, 243, 243);
   border-radius: 12px;
   padding: 2rem;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
 }
 
 /* Two Column Layout */
@@ -48,11 +48,11 @@
 .left-column {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .right-column {
-  position: sticky;
+  /* position: sticky; */
   top: 2rem;
   max-height: calc(100vh - 4rem);
   overflow-y: auto;
@@ -99,11 +99,11 @@
 }
 
 .progress-tracker .btn-outline-secondary {
-  background-color: rgba(226, 23, 23, 0.691);
+  background-color: rgba(152, 18, 18, 0.691);
   color: white;
   box-shadow: 1px 4px 1px rgba(247, 246, 246, 0.3);
   border-radius: 8px;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.5rem;
   font-size: 1rem;
   font-weight: 600;
 }
@@ -118,7 +118,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .roll-button-wrapper {
@@ -129,7 +129,7 @@
 .random-button {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border: none;
-  padding: 0.75rem 2rem;
+  padding: 0.75rem 3rem;
   font-size: 1.1rem;
   font-weight: 600;
   border-radius: 8px;
@@ -211,7 +211,7 @@
   align-items: center;
   gap: 1.5rem;
   padding: 1.5rem;
-  background-color: #f8f9fa;
+  background-color: #f3e4e4;
   border-radius: 10px;
   flex-wrap: wrap;
 }
@@ -274,7 +274,7 @@
 
 /* History Section */
 .history-section {
-  background-color: #f8f9fa;
+  background-color: #d5dfe8;
   padding: 1rem;
   border-radius: 8px;
   margin-bottom: 1.5rem;
@@ -312,7 +312,7 @@
 }
 
 .accordion-button {
-  background-color: #f8f9fa;
+  background-color: #dddedf;
   color: #333;
   font-weight: 600;
   font-size: 1.05rem;
